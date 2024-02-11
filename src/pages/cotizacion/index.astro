@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import SectionCard from "../../components/SectionCard.astro"
+import Button from "../../components/Button.astro"
+import Back from "../../icons/Back.astro"
+---
+
+<Layout title="Cotización" >
+    <main class="p-5 flex flex-col h-full items-start w-full  ">
+        <Button class="flex items-center justify-center gap-x-1 bg-slate-800 hover:bg-slate-600" href="./">
+            <Back />
+             Volver
+          </Button>
+        <div class="flex flex-col mx-auto gap-y-2 h-[30vh] items-center justify-center">
+            <h1 class=" text-center  text-4xl font-bold text-transparent
+            bg-clip-text bg-gradient-to-br from-white to-sky-400">Cotización actual </h1>
+            <p class="text-center text-slate-500 px-4"> Aquí podras obtener la cotizacion mas reciente de nuestros valores.</p>
+        </div>
+        <SectionCard />
+
+    </main>
+</Layout>

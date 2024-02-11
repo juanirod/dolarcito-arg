@@ -1,0 +1,50 @@
+---
+import {data} from "../lib/dolarapi"
+
+interface Datas{
+  nombre:String
+}
+---
+
+<div class="flex flex-col gap-y-2 px-5 py-4 mx-auto opacity-50 bg-slate-800 rounded-xl border-2 border-slate-700">
+   
+    <form action="">
+      <div class="flex items-center justify-center px-2 py-2">
+        <select
+          class="bg-slate-700 rounded-md px-4 py-2 text-md font-light"
+          disabled
+      
+        >
+          <option value="">Seleccione el tipo de moneda</option>
+          {data.map(({nombre}:Datas)=>{
+            return(
+              <option value={`${nombre}`} >{nombre}</option>
+            )
+          })}
+        </select>
+      </div>
+      <div class="flex flex-col mt-5">
+        <div class="flex px-2 py-2">
+          <div class="bg-sky-500 px-3 py-2 rounded-l-full font-medium">
+            AR$
+          </div>
+          <input
+            class="bg-slate-400 px-4 py-2 rounded-r-full"
+            type="number"
+            disabled
+          />
+        </div>
+        <div class="px-6"></div>
+        <div class="flex px-2 py-2">
+          <div class="bg-green-500 px-3 py-2 rounded-l-full font-medium">
+            U$D
+          </div>
+          <input
+            class="bg-slate-400 px-4 py-2 rounded-r-full"
+            type="number"
+            disabled
+          />
+        </div>
+      </div>
+    </form>
+  </div>
