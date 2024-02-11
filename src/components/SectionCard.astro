@@ -1,6 +1,6 @@
 ---
-import Card from "./Card.astro"
-import {data} from "../lib/dolarapi"
+import Card from "./Card.astro";
+import { data } from "../lib/dolarapi";
 
 interface Data {
   nombre: String;
@@ -8,17 +8,40 @@ interface Data {
   venta: number;
   fechaActualizacion: String;
 }
-
-
 ---
 
-
 <ul class="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-6">
+  {
+    data.map(({ nombre, compra, venta, fechaActualizacion }: Data) => {
+      const dateString = fechaActualizacion; // tu cadena de fecha
+      const parts = dateString.split("T"); // dividir la cadena en fecha y hora
 
-    {data.map(({nombre, compra, venta, fechaActualizacion}:Data)=>{
-        return( <Card nombre={nombre} compra={compra} venta={venta} fechaActualizacion={fechaActualizacion} />)
-    }) }
-    
-   
-   
-  </ul>
+      const dateParts = parts[0].split("-");
+      const year = dateParts[0];
+      const month = dateParts[1];
+      const day = dateParts[2];
+
+      const formattedDate = `${day}-${month}-${year}`;
+
+      const timeParts = parts[1].split(":");
+      let hour = parseInt(timeParts[0]) - 3;
+      let minute = timeParts[1];
+
+      // Asegurarse de que la hora esté en el rango correcto (0-23)
+      if (hour < 0) {
+        hour += 24; // Si la hora es negativa, sumamos 24 horas para ajustarla al día anterior
+      }
+
+      const formattedTime = `${hour}:${minute}`; // Formatear la hora como hh:mm
+
+      return (
+        <Card
+          nombre={nombre}
+          compra={compra}
+          venta={venta}
+          fechaActualizacion={formattedDate + " - " + formattedTime}
+        />
+      );
+    })
+  }
+</ul>
